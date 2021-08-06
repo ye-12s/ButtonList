@@ -68,7 +68,7 @@ void text_button()
 }
 
 void main() {
-    /*SomeBody*/
+    //do something...
     text_button();
     while(1);
 }
