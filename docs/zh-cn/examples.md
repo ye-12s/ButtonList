@@ -1,70 +1,65 @@
 # Examples
 
 ```c
-void workup1(pressEvent event) {
-    switch (event) {
-        case Long:
-            // do someththing...
+void func1(ButtonPressEvent event)
+{
+        switch (event) {
+        case pressEvent_long:
+            // do something...
             break;
-        case Short:
-            // do someththing...
+        case pressEvent_short:
+            // do something...
             break;
-        case Even:
-            // do someththing...
+        case pressEvent_keep:
+            // do something...
             break;
-        case Up:
-            // do someththing...
+        case pressEvent_up:
+            // do something...
             break;
-        case Down:
-            // do someththing...
-            break;
-        default:
-            break;
-    }
-}
-void workup2(pressEvent event) {
-    switch (event) {
-        case Long:
-            // do someththing...
-            break;
-        case Short:
-            // do someththing...
-            break;
-        case Even:
-            // do someththing...
-            break;
-        case Up:
-            // do someththing...
-            break;
-        case Down:
-            // do someththing...
+        case pressEvent_down:
+            // do something...
             break;
         default:
             break;
     }
 }
-
-GPIO_PinState readPin1() {
-    return HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_12);
+void func2(ButtonPressEvent event)
+{
+        switch (event) {
+        case pressEvent_long:
+            // do something...
+            break;
+        case pressEvent_short:
+            // do something...
+            break;
+        case pressEvent_keep:
+            // do something...
+            break;
+        case pressEvent_up:
+            // do something...
+            break;
+        case pressEvent_down:
+            // do something...
+            break;
+        default:
+            break;
+    }
 }
-GPIO_PinState readPin2() {
-    return HAL_GPIO_ReadPin(GPIOB,GPIO_PIN_13);
+level_t readPin1() {
+    return HAL_GPIO_ReadPin(/*do something...*/);
+}
+level_t readPin2() {
+    return HAL_GPIO_ReadPin(/*do something...*/);
 }
 
 void text_button()
 {
-    Button button1 = {
-            .PinState = GPIO_PIN_RESET,
-            .workupCallBackEvent = workup1,
-            .buttonLevel = readPin1
-    };
-    Button button2 = {
-            .PinState = GPIO_PIN_RESET,
-            .workupCallBackEvent = workup2,
-            .buttonLevel = readPin2
-    };
-    buttonConfig();
-    addBurrons(2,&button1,&button2);
+	buttonInit();
+    Button button = {0};
+    buttonConfig(&button,func1,readPin1,0);
+    addButton(&button);
+    buttonConfig(&button,func2,readPin2,0);
+    addButton(&button);
 }
 
 void main() {
